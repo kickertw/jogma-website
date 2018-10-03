@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
+import { LoginService } from '../login/login.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading: boolean;
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService) {
     this.createForm();
   }
 
@@ -24,8 +26,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(){
-    this.loading = !this.loading;
-    console.log('Your username=[' + this.loginForm.value.username + '] + password=[' + this.loginForm.value.password + ']');
+  onSubmit() {
+    const user = this.loginService.login(this.loginForm.value.username, this.loginForm.value.password);
+    console.log(user);
   }
 }
