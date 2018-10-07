@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  jogmaApi: 'http:\\localhost:44324'
+  jogmaApi: 'https://localhost:44380/api'
 };
 
 /*

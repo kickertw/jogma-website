@@ -27,7 +27,19 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const user = this.loginService.login(this.loginForm.value.username, this.loginForm.value.password);
-    console.log(user);
+    this.loginService.login(this.loginForm.value.username, this.loginForm.value.password)
+      .subscribe((data: any) => {
+        const jwtToken = localStorage.getItem('token');
+        if (!jwtToken) {
+          localStorage.setItem('token', data.token);
+        }
+        console.log(data);
+      });
+  }
+
+  testAuth() {
+    this.loginService.test(localStorage.getItem('token')).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 }
